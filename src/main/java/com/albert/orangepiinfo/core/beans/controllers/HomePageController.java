@@ -15,12 +15,13 @@ import java.io.IOException;
 public class HomePageController {
 
     @Autowired
-    ProcessWrapperFactory processWrapperFactory;
+    private ProcessWrapperFactory processWrapperFactory;
 
     @RequestMapping(value = "/", method = {RequestMethod.GET})
     public String getHomePage(Model model, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
-        if(httpServletRequest.getSession().getAttribute("sesionid") == null ){
+        if(httpServletRequest.getSession().getAttribute("SESSION") == null ){
+
             try {
                 httpServletResponse.sendRedirect("/login");
             } catch (IOException e) {
@@ -37,4 +38,5 @@ public class HomePageController {
 
         return "homepage";
     }
+
 }

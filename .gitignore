@@ -24,3 +24,5 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+*.p12
+*.properties

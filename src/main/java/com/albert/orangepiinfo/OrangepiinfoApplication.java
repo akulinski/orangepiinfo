@@ -9,4 +9,6 @@ public class OrangepiinfoApplication {
     public static void main(String[] args) {
         SpringApplication.run(OrangepiinfoApplication.class, args);
     }
+
+
 }
