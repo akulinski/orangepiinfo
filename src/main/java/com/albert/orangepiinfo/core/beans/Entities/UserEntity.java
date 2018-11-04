@@ -1,11 +1,11 @@
 package com.albert.orangepiinfo.core.beans.Entities;
 
-import core.sessionmanagment.ISaveable;
-import events.ISavableAddEvent;
-import events.ISaveableDelateEvent;
+import com.albert.orangepiinfo.sessionmanagment.callbacks.OnSessionAddedCallback;
+import com.albert.orangepiinfo.sessionmanagment.callbacks.implementations.OnSessionAddedCallbackImpl;
+import com.albert.orangepiinfo.sessionmanagment.events.ISavableAddEvent;
+import com.albert.orangepiinfo.sessionmanagment.sessionstoring.ISavable;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -14,11 +14,7 @@ import java.util.Date;
 
 
 @Entity(name = "User")
-public class UserEntity implements ISaveable {
-
-    @Autowired
-    @Transient
-    private ApplicationEventPublisher applicationEventPublisher;
+public class UserEntity implements ISavable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,14 +50,14 @@ public class UserEntity implements ISaveable {
     }
 
     @Override
-    public boolean saveSession() {
-        applicationEventPublisher.publishEvent(new ISavableAddEvent(this,this));
-        return true;
+    public String saveSession(ApplicationEventPublisher applicationEventPublisher) {
+        OnSessionAddedCallback onSessionAddedCallback = new OnSessionAddedCallbackImpl();
+        applicationEventPublisher.publishEvent(new ISavableAddEvent(this,this,onSessionAddedCallback));
+        return onSessionAddedCallback.getReturnedId();
     }
 
     @Override
     public boolean delateSession() {
-        applicationEventPublisher.publishEvent(new ISaveableDelateEvent(this,this));
         return false;
     }
 }

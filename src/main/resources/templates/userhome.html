@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>User Home</title>
 </head>
+
 <body>
 
-    <tr th:each="user : ${userEntity}">
-        <td th:text="${userEntity.id}">1</td>
-        <td><a href="#" th:text="${userEntity.username}">username</a></td>
-        <td th:text="${userEntity.password}">password</td>
-    </tr>
+    <div id="user-info" class="align-middle">
+        <tr th:each="user : ${userEntity}" class="card">
+            <td><a href="#" th:text="${userEntity.username}">username</a></td>
+        </tr>
+    </div>
 
+    <div id="command" class="align-self-md-auto">
+    </div>
+
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
+    <script th:src="@{js/callGetCommand.js}"></script>
 </body>
+
 </html>

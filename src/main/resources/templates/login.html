@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Please Log in</title>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
-    <div>
-        Please Log in
-    </div>
-    <form id="login" action="#" th:action="@{/login}" th:object="${login}" method="post">
+<div>
+    Please Log in
+</div>
 
-        <p>username: <input type="text" th:field="*{username}" /></p>
-        <p>password: <input type="password" th:field="*{password}" /></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+
+    <form id="login" action="#" th:action="@{/login}" th:object="${login}" method="post" class="input-group-prepend">
+        <p>username: <input type="text" th:field="*{username}"/></p><br/>
+        <p>password: <input type="password" th:field="*{password}" class="password-field"/></p><br/>
+        <p><input type="submit" value="Submit" class="button"/> <input type="reset" value="Reset" class="bullet-button"/>
+        </p>
     </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+
 </body>
 </html>
